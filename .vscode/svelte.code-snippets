@@ -1,0 +1,22 @@
+{
+	"Svelte if block": {
+		"prefix": "s-if",
+		"body": ["{#if $1}", "\t$2", "{/if}"],
+		"description": "Svelte If Block"
+	},
+	"Svelte else if block": {
+		"prefix": "s-elseif",
+		"body": ["{:else if $1}", "\t$2"],
+		"description": "Svelte else if block"
+	},
+	"Svelte else block": {
+		"prefix": "s-else",
+		"body": ["{:else}", "\t$1"],
+		"description": "Svelte else block"
+	},
+	"Svelte each block": {
+		"prefix": "s-each",
+		"body": ["{#each $1 as $2}", "\t$3", "{/each}"],
+		"description": "Svelte each block"
+	}
+}

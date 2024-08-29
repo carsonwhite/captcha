@@ -1,25 +1,56 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount } from 'svelte';
+	import { answerStore } from '../../stores/answerStore';
+	import { resetStore } from '../../stores/resetStore';
+	import { browser } from '$app/environment';
 
- export let length = 6;
+	export let length = 6;
+	export let difficulty = 1;
 
- onMount (() => {
-  const canvas = document.getElementById("captchaCanvas") as HTMLCanvasElement;
-  const ctx = canvas.getContext("2d");
+	const chars = '0123456789abcdefghijklmnopqrstuvwxtzabcdefghiklmnopqrstuvwxyz?!@#$%^&*';
 
-  const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-  const string_length = length;
-  let randomstring = "";
+	function generateRandomString() {
+		// TO DO properly type this
+		let captchaString: any = [];
 
-  for (let i = 0; i < string_length; i++) {
-	const rnum = Math.floor(Math.random() * chars.length);
-	randomstring += chars.substring(rnum, rnum + 1);
-  }
+		for (let i = 0; i < length; i++) {
+			let posOrNeg = Math.random() < 0.5 ? -1 : 1;
+			let letterRotation = posOrNeg * Math.floor(Math.random() * 45);
+			const rnum = Math.floor(Math.random() * chars.length);
+			captchaString.push([chars.substring(rnum, rnum + 1), letterRotation]);
+		}
+		return captchaString;
+	}
 
-  ctx.font = "30px Arial";
-  ctx.fillText(randomstring, 10, 30);
- });
+	function generate() {
+		if (browser) {
+			let randomString: string[] = generateRandomString();
+			$answerStore = randomString.map((el) => el[0]).join('');
 
+			const canvas = document.getElementById('captchaCanvas') as HTMLCanvasElement;
+			const ctx = canvas.getContext('2d');
+
+			ctx.font = '60px Arial';
+			ctx.fillStyle = 'black';
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = 'white';
+
+			randomString.forEach(([letter, rotation], index) => {
+				ctx.save();
+				ctx.translate(10 + index * 60, Math.random() * 20 + 60);
+				ctx.rotate((rotation * Math.PI) / 180);
+				ctx.fillText(letter, 0, 0);
+				ctx.restore();
+			});
+		}
+	}
+
+	onMount(() => {
+		generate();
+	});
+	$: $resetStore, generate();
 </script>
 
-<canvas id="captchaCanvas" width="200" height="50"></canvas>
+<div class="border-2 border-purple-700 h-full w-full">
+	<canvas id="captchaCanvas" width="400" height="200"></canvas>
+</div>
