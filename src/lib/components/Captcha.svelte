@@ -7,7 +7,8 @@
 	export let length = 6;
 	export let difficulty = 1;
 
-	const chars = '0123456789abcdefghijklmnopqrstuvwxtzabcdefghiklmnopqrstuvwxyz?!@#$%^&*';
+	const chars =
+		'0123456789abcdefghijklmnopqrstuvwxtzabcdefghiklmnopqrstuvwxyz?!@#$%^&*ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 	function generateRandomString() {
 		// TO DO properly type this
@@ -31,9 +32,9 @@
 			const ctx = canvas.getContext('2d');
 
 			ctx.font = '60px Arial';
-			ctx.fillStyle = 'black';
-			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			ctx.fillStyle = 'white';
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = 'black';
 
 			randomString.forEach(([letter, rotation], index) => {
 				ctx.save();

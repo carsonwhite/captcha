@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "Captcha",
+	"version": "0.1",
+	"description": "Complete Captchas before gaining access to websites.",
+	"icons": {
+		"48": "static/icon_48.png"
+	},
+	"permissions": [
+		"storage",
+		"activeTab"
+	],
+	"browser_action": {
+		"default_icon": "/static/icon_48.png",
+		"default_title": "Captcha Blocker",
+		"default_popup": "index.html"
+	}
+}

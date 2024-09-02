@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { answerStore } from '../stores/answerStore';
 	import { resetStore } from '../stores/resetStore';
+	import BlockList from '$lib/components/BlockList.svelte';
 
 	let numberToSolve = 5;
 	let difficulty = 1;
@@ -39,4 +40,6 @@
 		<button type="submit">Check</button>
 	</form>
 	<button type="button" on:click={getNew}>Get new</button>
+
+	<BlockList></BlockList>
 </main>
