@@ -15,14 +15,14 @@
 	];
 </script>
 
-<div class="bg-white text-black py-2">
+<div class="bg-black text-white py-2 font-serif lg:text-2xl">
 	<table class="w-full">
 		<thead>
 			<tr class=" grid grid-cols-10">
 				<th class="col-span-3">Website</th>
-				<th>Captcha Length</th>
-				<th> Complexity</th>
-				<th>Time allowed</th>
+				<th>Captchas to solve</th>
+				<th> Captcha difficulty</th>
+				<th>Time allowed before blocking</th>
 				<th>Start day</th>
 				<th>Start time</th>
 				<th>End day</th>
@@ -44,16 +44,17 @@
 		</div>
 	{/each}
 
-	{#if testItems.length === 0 || addNewRule}
-		<form action="/" class="grid grid-cols-10">
-			<input class="border col-span-3" type="text" name="website" />
+	<!-- {#if testItems.length === 0 || addNewRule} -->
+	{#if true}
+		<form action="/" class="grid grid-cols-10 text-black">
+			<input class=" col-span-3" type="text" name="website" />
 
-			<input class="border" type="text" name="length" />
+			<input class="" type="text" name="length" />
 
-			<input class="border" type="text" name="difficulty" />
+			<input class="" type="text" name="difficulty" />
 
-			<input class="border" type="number" name="limit" />
-			<select class="border" name="startDay">
+			<input class="" type="number" name="limit" />
+			<select class="" name="startDay">
 				<option value="Sunday">Sunday</option>
 				<option value="Monday">Monday</option>
 				<option value="Tuesday">Tuesday</option>
@@ -63,7 +64,7 @@
 				<option value="Saturday">Saturday</option>
 			</select>
 
-			<select class="border" name="endDay">
+			<select class="" name="endDay">
 				<option value="Sunday">Sunday</option>
 				<option value="Monday">Monday</option>
 				<option value="Tuesday">Tuesday</option>
@@ -73,9 +74,9 @@
 				<option value="Saturday">Saturday</option>
 			</select>
 
-			<input class="border" type="time" name="startTime" />
+			<input class="" type="time" name="startTime" />
 
-			<input class="border" type="time" name="endTime" />
+			<input class="" type="time" name="endTime" />
 			{#if addNewRule || testItems.length === 0}
 				<div class="grid place-content-center mt-4 w-full">
 					<button
@@ -102,7 +103,6 @@
 
 <style>
 	th {
-		border: 1px solid black;
-		background-color: #f1f1f1;
+		border: 1px solid white;
 	}
 </style>

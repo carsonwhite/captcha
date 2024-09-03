@@ -28,7 +28,7 @@
 	});
 </script>
 
-<main class="w-full h-full grid place-content-center text-white">
+<main class="w-full h-full grid place-content-center">
 	<section class="text-white text-4xl text-center py-4 font-mono">
 		{completed} / {numberToSolve}
 	</section>
