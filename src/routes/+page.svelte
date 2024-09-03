@@ -28,7 +28,7 @@
 	});
 </script>
 
-<main class="w-full h-full grid place-content-center">
+<main class="w-10/12 h-full grid place-content-center">
 	<section class="text-white text-4xl text-center py-4 font-mono">
 		{completed} / {numberToSolve}
 	</section>
@@ -40,6 +40,5 @@
 		<button type="submit">Check</button>
 	</form>
 	<button type="button" on:click={getNew}>Get new</button>
-
 	<BlockList></BlockList>
 </main>
