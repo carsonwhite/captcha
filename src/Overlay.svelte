@@ -1,6 +1,7 @@
 <!-- src/Overlay.svelte -->
 <script>
 	export let message = 'This is an overlay!';
+	console.log('Overlay loaded');
 </script>
 
 <div class="overlay">

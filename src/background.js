@@ -1,7 +1,11 @@
 browser.webNavigation.onCompleted.addListener(async (details) => {
 	const url = new URL(details.url).hostname;
 	console.log(url);
-	const { websites } = await browser.storage.local.get("websites") || { websites: ['google.com'] };
+	// const { websites } = await browser.storage.local.get("websites") || { websites: ['google.com'] };
+	const { websites } = { websites: ['google.com'] };
+
+	console.log(websites);
+
 
 	if (websites.some((site) => url.includes(site))) {
 		console.log("showOverlay");

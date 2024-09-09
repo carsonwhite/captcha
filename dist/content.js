@@ -1,1 +1,1 @@
-import{c as r}from"./overlay.js";import"./index.js";browser.runtime.onMessage.addListener(e=>{e.action==="showOverlay"&&r("This is a Svelte component overlay!")});
+import{c as o}from"./overlay.js";import"./index.js";browser.runtime.onMessage.addListener(e=>{console.log("message received",e),e.action==="showOverlay"&&o("This is a Svelte component overlay!")});
