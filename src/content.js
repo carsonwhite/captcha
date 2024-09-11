@@ -19,37 +19,37 @@
 // 	}
 // });
 
-import Overlay from './Overlay.svelte';
-
-function createOverlay(message) {
-
-
-	const target = document.createElement('div');
-	document.body.appendChild(target);
-
-	new Overlay({
-		target,
-		props: {
-			message,
-		},
-	});
-}
+// import Overlay from './Overlay.svelte';
 
 // function createOverlay(message) {
-// 	const overlay = document.createElement('div');
-// 	overlay.style.position = 'fixed';
-// 	overlay.style.top = '0';
-// 	overlay.style.left = '0';
-// 	overlay.style.width = '100%';
-// 	overlay.style.height = '50px';
-// 	overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-// 	overlay.style.color = 'white';
-// 	overlay.style.zIndex = '9999';
-// 	overlay.style.textAlign = 'center';
-// 	overlay.style.lineHeight = '50px';
-// 	overlay.textContent = message;
-// 	document.body.appendChild(overlay);
+
+
+// 	const target = document.createElement('div');
+// 	document.body.appendChild(target);
+
+// 	new Overlay({
+// 		target,
+// 		props: {
+// 			message,
+// 		},
+// 	});
 // }
+
+function createOverlay(message) {
+	const overlay = document.createElement('div');
+	overlay.style.position = 'fixed';
+	overlay.style.top = '0';
+	overlay.style.left = '0';
+	overlay.style.width = '100%';
+	overlay.style.height = '50px';
+	overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+	overlay.style.color = 'white';
+	overlay.style.zIndex = '9999';
+	overlay.style.textAlign = 'center';
+	overlay.style.lineHeight = '50px';
+	overlay.textContent = message;
+	document.body.appendChild(overlay);
+}
 
 // Listen for messages from the background script
 browser.runtime.onMessage.addListener((message) => {

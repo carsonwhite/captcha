@@ -1,6 +1,6 @@
 <script lang="ts">
-	import BlockList from './lib/BlockList.svelte';
-	import Captcha from './lib/Captcha.svelte';
+	import BlockList from './components/BlockList.svelte';
+	import Captcha from './components/Captcha.svelte';
 </script>
 
 <main class=" ">
