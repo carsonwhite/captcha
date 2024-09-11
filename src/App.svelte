@@ -5,5 +5,5 @@
 
 <main class=" ">
 	<BlockList />
-	<!-- <Captcha /> -->
+	<Captcha />
 </main>

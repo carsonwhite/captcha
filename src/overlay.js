@@ -2,6 +2,8 @@
 import Overlay from './Overlay.svelte';
 
 function createOverlay(message) {
+
+
 	const target = document.createElement('div');
 	document.body.appendChild(target);
 
