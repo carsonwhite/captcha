@@ -1,6 +1,6 @@
 browser.webNavigation.onCompleted.addListener(async (details) => {
 	const url = new URL(details.url).hostname;
-	console.log(url);
+	console.log("url", url);
 	// const { websites } = await browser.storage.local.get("websites") || { websites: ['google.com'] };
 	const { websites } = { websites: ['google.com'] };
 

@@ -1,12 +1,11 @@
 import Overlay from "../components/Overlay.svelte";
 
-// new Overlay({ target: document.body });
 
-// const app = new Overlay({
-// 	target: document.body, // or any specific element you want
-// });
-
-// export default app;
+// THIS IS WHAT ALLOWS TAILWIND TO WORK IN THE CONTENT SCRIPT
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = browser.runtime.getURL('content/index.css'); // Use chrome.runtime.getURL() to reference the file
+document.head.appendChild(link);
 
 
 browser.runtime.onMessage.addListener((message) => {

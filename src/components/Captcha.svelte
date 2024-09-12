@@ -30,7 +30,7 @@
 
 		if (ctx) {
 			ctx.font = '60px Arial';
-			ctx.fillStyle = 'white';
+			ctx.fillStyle = 'green';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			ctx.fillStyle = 'black';
 
