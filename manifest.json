@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
-	"name": "Svelte Vite Extension",
+	"name": "Captcha Blocker",
 	"version": "1.0",
-	"description": "A simple browser extension built with Svelte and Vite",
+	"description": "No one likes captchas, make yourself solve one to get to your favourite time wasting websites",
 	"permissions": [
 		"storage",
 		"tabs",
