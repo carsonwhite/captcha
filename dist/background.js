@@ -1,1 +1,0 @@
-browser.webNavigation.onCompleted.addListener(async e=>{const s=new URL(e.url).hostname,{websites:o}={websites:["google.com"]};o.some(n=>s.includes(n))&&browser.tabs.sendMessage(e.tabId,{action:"showOverlay"})},{url:[{urlMatches:".*"}]});
