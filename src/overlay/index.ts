@@ -1,15 +1,14 @@
 import Overlay from "../components/Overlay.svelte";
 
 
-// THIS IS WHAT ALLOWS TAILWIND TO WORK IN THE CONTENT SCRIPT
+// This is what allows Tailwind to work in the content script
 const link = document.createElement('link');
 link.rel = 'stylesheet';
-link.href = browser.runtime.getURL('content/index.css'); // Use chrome.runtime.getURL() to reference the file
+link.href = browser.runtime.getURL('content/index.css');
 document.head.appendChild(link);
 
 
 browser.runtime.onMessage.addListener((message) => {
-	console.log('Message received in content script:', message);
 	if (message.action === 'showOverlay') {
 		createOverlay('This is a Svelte component overlay!');
 	}

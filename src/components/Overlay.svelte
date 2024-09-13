@@ -1,32 +1,16 @@
 <script lang="ts">
 	import { resetStore } from '../stores/resetStore';
 	import Captcha from './Captcha.svelte';
+	import '../app.css';
 </script>
 
-<div
-	class="h-screen w-screen fixed overflow-hidden bg-red-800 bg-opacity-50 z-50"
-	style="position: absolute; width: 100vh; height: 100vh; background-color: gray; --tw-bg-opacity: 0.5; top: 0px; z-index: 1000;"
-	id="cover">
-	<!-- <Captcha></Captcha> -->
-	<button class="p-2 bg-green-500 rounded-lg text-xl" type="button" on:click={() => ($resetStore = !$resetStore)}>RESET</button>
+<div class="h-screen w-screen absolute overflow-hidden bg-black bg-opacity-50 z-50" style="position: absolute; top: 0px; z-index: 1000;" id="cover">
+	<div class="grid place-content-center h-1/3 border border-red-500">
+		<section>
+			<Captcha></Captcha>
+		</section>
+		<section>
+			<button class="p-2 bg-green-500 rounded-lg text-xl" type="button" on:click={() => ($resetStore = !$resetStore)}>RESET</button>
+		</section>
+	</div>
 </div>
-<div></div>
-
-<style>
-	#cover {
-		position: absolute;
-		background-color: blueviolet;
-		height: 100vh;
-		width: 100vw;
-	}
-	button {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-	body {
-		background-color: red;
-		color: yellow;
-	}
-</style>

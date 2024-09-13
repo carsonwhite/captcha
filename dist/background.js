@@ -1,1 +1,1 @@
-browser.webNavigation.onCompleted.addListener(async e=>{const o=new URL(e.url).hostname;console.log("url",o);const{websites:s}={websites:["google.com"]};console.log(s),s.some(l=>o.includes(l))&&(console.log("showOverlay"),browser.tabs.sendMessage(e.tabId,{action:"showOverlay"}))},{url:[{urlMatches:".*"}]});
+browser.webNavigation.onCompleted.addListener(async e=>{const s=new URL(e.url).hostname,{websites:o}={websites:["google.com"]};o.some(n=>s.includes(n))&&browser.tabs.sendMessage(e.tabId,{action:"showOverlay"})},{url:[{urlMatches:".*"}]});
