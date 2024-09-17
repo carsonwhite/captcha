@@ -23,11 +23,8 @@
 
 	const makeNewRule = async () => {
 		$blockListStore = [...$blockListStore, newRule];
-		console.log($blockListStore);
 
-		browser.storage.local.set({ blockList: $blockListStore });
-		console.log(await browser.storage.local.get('blockList'), 'blocklist');
-
+		await browser.storage.local.set({ blockList: $blockListStore });
 		addNewRule = false;
 	};
 	const updateNewRuleDay = (day: number) => {

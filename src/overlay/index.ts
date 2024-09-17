@@ -10,9 +10,8 @@ document.head.appendChild(link);
 
 browser.runtime.onMessage.addListener(async (message) => {
 	if (message.action === 'showOverlay') {
-		let { websites } = await browser.storage.local.get("websites");
+		console.log('showing overlay');
 
-		console.log(websites[0]);
 
 		createOverlay('This is a Svelte component overlay!');
 	}
