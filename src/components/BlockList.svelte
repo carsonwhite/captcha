@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { blockListStore } from '../stores/blockListStore';
 
 	let addNewRule = false;
@@ -14,11 +15,18 @@
 		startTime: '00:00',
 		endTime: '23:59',
 	};
-	const makeNewRule = () => {
+
+	onMount(async () => {
+		let rules = await browser.storage.local.get('blockList');
+		$blockListStore = rules.blockList || [];
+	});
+
+	const makeNewRule = async () => {
 		$blockListStore = [...$blockListStore, newRule];
 		console.log($blockListStore);
 
-		// browser.storage.local.set({ blockList: $blockListStore });
+		browser.storage.local.set({ blockList: $blockListStore });
+		console.log(await browser.storage.local.get('blockList'), 'blocklist');
 
 		addNewRule = false;
 	};
