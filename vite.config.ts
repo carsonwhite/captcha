@@ -11,6 +11,10 @@ const plugins = [
 			{
 				src: 'manifest.json',
 				dest: ''
+			},
+			{
+				src: 'static/icon_48.png',
+				dest: 'static'
 			}
 		]
 	}),
