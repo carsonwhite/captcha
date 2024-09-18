@@ -8,10 +8,10 @@
 
 	let newRule = {
 		website: 'test.com',
-		length: 0,
+		numToSolve: 2,
 		difficulty: 'easy',
 		limit: 0,
-		days: [0, 0, 0, 1, 0, 0, 0],
+		days: [1, 1, 1, 1, 1, 1, 1],
 		startTime: '00:00',
 		endTime: '23:59',
 	};
@@ -51,7 +51,7 @@
 	{#each $blockListStore as blockItem}
 		<div class="grid grid-cols-10">
 			<div class="col-span-3 border p-1">{blockItem.website}</div>
-			<div class="border p-1">{blockItem.length}</div>
+			<div class="border p-1">{blockItem.numToSolve}</div>
 			<div class="border p-1">{blockItem.difficulty}</div>
 			<div class="border p-1">{blockItem.limit}</div>
 			<div class="border col-span-2 grid grid-cols-7">
@@ -72,7 +72,7 @@
 			<div class="grid grid-cols-10">
 				<input class=" col-span-3" type="text" name="website" required bind:value={newRule.website} />
 
-				<input class="" type="text" name="length" required bind:value={newRule.length} />
+				<input class="" type="text" name="length" required bind:value={newRule.numToSolve} />
 
 				<input class="" type="text" name="difficulty" required bind:value={newRule.difficulty} />
 

@@ -7,17 +7,16 @@ link.rel = 'stylesheet';
 link.href = browser.runtime.getURL('content/index.css');
 document.head.appendChild(link);
 
-
 browser.runtime.onMessage.addListener(async (message) => {
 	if (message.action === 'showOverlay') {
 		console.log('showing overlay');
 
 
-		createOverlay('This is a Svelte component overlay!');
+		createOverlay(message.ruleNum);
 	}
 });
 
-function createOverlay(message) {
+function createOverlay(ruleNum: number) {
 
 	const target = document.createElement('div');
 	document.body.appendChild(target);
@@ -25,7 +24,7 @@ function createOverlay(message) {
 	new Overlay({
 		target,
 		props: {
-			message,
+			ruleNum,
 		},
 	});
 }
