@@ -25,6 +25,7 @@
 		"vite-plugin-static-copy": "^1.0.6"
 	},
 	"dependencies": {
+		"web-ext": "^8.3.0",
 		"webextension-polyfill": "^0.12.0"
 	}
 }
