@@ -33,7 +33,7 @@
 	};
 </script>
 
-<div class="bg-black text-white py-2 xl:text-2xl w-full">
+<div class="bg-black text-gray-500 py-2 xl:text-2xl w-full">
 	<table class="w-full">
 		<thead>
 			<tr class=" grid grid-cols-10">

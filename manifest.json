@@ -35,6 +35,6 @@
 		"content.js",
 		"background.js",
 		"index.html",
-		"content/reset.png"
+		"content/*"
 	]
 }
