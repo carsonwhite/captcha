@@ -3,8 +3,16 @@
 	import { answerStore } from '../stores/answerStore';
 	import { resetStore } from '../stores/resetStore';
 
-	export let length = 6;
-	export let difficulty = 1;
+	let length = 6;
+	export let difficulty: number;
+	console.log('difficulty: ', difficulty);
+
+	length = Math.floor(length + difficulty * 1.2);
+
+	let canvasWidth: number = 400 + length * 5;
+	let canvasHeight: number = 100;
+
+	console.log('canvasWidth: ', canvasWidth, 'length: ', length);
 
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
@@ -31,14 +39,14 @@
 		$answerStore = randomString.map((el) => el[0]).join('');
 
 		if (ctx) {
-			ctx.font = '60px Arial';
+			ctx.font = '40px Arial';
 			ctx.fillStyle = 'white';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			ctx.fillStyle = 'black';
 
 			randomString.forEach(([letter, rotation], index) => {
 				ctx.save();
-				ctx.translate(10 + index * 60, Math.random() * 20 + 60);
+				ctx.translate(10 + index * 30, Math.random() * 20 + 60);
 				ctx.rotate((rotation * Math.PI) / 180);
 				ctx.fillText(letter, 0, 0);
 				ctx.restore();
@@ -57,7 +65,7 @@
 </script>
 
 <div class="border-2 border-purple-700 bg-white h-full w-full">
-	<canvas id="captchaCanvas" width="400" height="200"> </canvas>
+	<canvas id="captchaCanvas" width={canvasWidth} height={canvasHeight} class="border-2"> </canvas>
 	<button class="h-10 w-10 grid place-content-center border-2 border-red-500" on:click={() => ($resetStore = !$resetStore)}>
 		<img src={imagePath} alt="reset captcha" class="" />
 	</button>

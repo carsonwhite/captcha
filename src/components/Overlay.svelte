@@ -15,11 +15,14 @@
 	let solved: number = 0;
 	let imagePath: string;
 	let imagePathSmol: string;
+	let difficulty: number;
 
 	onMount(async () => {
 		browser.storage.local.get('blockList').then((res) => {
 			blockList = res.blockList;
 			numToSolve = blockList[ruleNum]?.numToSolve;
+			difficulty = blockList[ruleNum]?.difficulty;
+			console.log('blockList: ', blockList, 'numToSolve: ', numToSolve, 'difficulty: ', difficulty);
 		});
 		imagePath = browser.runtime.getURL('content/reset.png');
 		imagePathSmol = browser.runtime.getURL('content/reset-double.png');
@@ -49,7 +52,9 @@
 			{solved} / {numToSolve}
 		</section>
 		<section class="grid">
-			<Captcha></Captcha>
+			{#if difficulty}
+				<Captcha {difficulty}></Captcha>
+			{/if}
 		</section>
 		<section>
 			<form on:submit|preventDefault={checkCaptcha} class="text-black">
@@ -61,7 +66,7 @@
 </div>
 
 <style>
-	#overlayContainer {
+	/* #overlayContainer {
 		all: revert !important;
-	}
+	} */
 </style>

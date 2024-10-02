@@ -9,7 +9,7 @@
 	let newRule = {
 		website: 'test.com',
 		numToSolve: 2,
-		difficulty: 'easy',
+		difficulty: 1,
 		limit: 0,
 		days: [1, 1, 1, 1, 1, 1, 1],
 		startTime: '00:00',
@@ -39,7 +39,7 @@
 			<tr class=" grid grid-cols-10">
 				<th class="col-span-3">Website</th>
 				<th>Captchas to solve</th>
-				<th> Captcha difficulty</th>
+				<th> Captcha difficulty <br /> (1-10)</th>
 				<th>Time allowed before blocking</th>
 				<th class="col-span-2">Days <br /> (click letters to toggle)</th>
 				<th>Start time</th>
@@ -74,7 +74,7 @@
 
 				<input class="" type="text" name="length" required bind:value={newRule.numToSolve} />
 
-				<input class="" type="text" name="difficulty" required bind:value={newRule.difficulty} />
+				<input class="" type="number" max="10" min="1" name="difficulty" required bind:value={newRule.difficulty} />
 
 				<input class="" type="number" name="limit" required bind:value={newRule.limit} />
 
