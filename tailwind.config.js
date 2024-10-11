@@ -4,7 +4,7 @@ export default {
 	theme: {
 		extend: {},
 	},
-	content: ["./index.html", './src/**/*.{svelte,js,ts}'],
+	content: ["./index.html", './src/**/*.{html,svelte,js,ts}'],
 	variants: {
 		extend: {},
 	},

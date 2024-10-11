@@ -14,8 +14,11 @@
 	let numToSolve: number;
 	let solved: number = 0;
 	let imagePath: string;
-	let imagePathSmol: string;
 	let difficulty: number;
+
+	let base;
+	let stylesheets;
+	let scripts;
 
 	onMount(async () => {
 		browser.storage.local.get('blockList').then((res) => {
@@ -25,9 +28,15 @@
 			console.log('blockList: ', blockList, 'numToSolve: ', numToSolve, 'difficulty: ', difficulty);
 		});
 		imagePath = browser.runtime.getURL('content/reset.png');
-		imagePathSmol = browser.runtime.getURL('content/reset-double.png');
 		console.log('imagePath: ', imagePath);
-		console.log('imagePathSmol: ', imagePathSmol);
+		base = document.getRootNode() as Document;
+		console.log(base);
+		stylesheets = Array.from(base.styleSheets).filter((stylesheet) => !stylesheet.href || !stylesheet.href.includes('content/index.css'));
+		stylesheets.forEach((stylesheet) => {
+			if (stylesheet.ownerNode && stylesheet.ownerNode.parentNode) {
+				stylesheet.ownerNode.parentNode.removeChild(stylesheet.ownerNode);
+			}
+		});
 	});
 
 	const checkCaptcha = () => {
@@ -46,7 +55,11 @@
 	};
 </script>
 
-<div id="overlayContainer" class="h-screen w-screen absolute overflow-hidden" style="position: absolute; top: 0px; z-index: 1000;">
+<svelte:head>
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</svelte:head>
+
+<div id="overlayContainer" class="h-screen w-screen absolute overflow-clip bg-black" style="position: absolute; top: 0px; z-index: 1000;">
 	<div class="grid place-content-center h-full border border-red-500">
 		<section class="text-4xl grid place-content-center bg-green-500 text-white border">
 			{solved} / {numToSolve}
@@ -56,17 +69,25 @@
 				<Captcha {difficulty}></Captcha>
 			{/if}
 		</section>
-		<section>
-			<form on:submit|preventDefault={checkCaptcha} class="text-black">
-				<input type="text" id="captchaInput" class="p-2 bg-white rounded-lg text-xl" />
-				<button class="p-2 bg-white rounded-lg text-xl text-black border-2 border-green-500" type="submit">Submit</button>
-			</form>
+		<section class=" bg-white" id="answerBar">
+			<div class="">
+				<button class="w-10 h-10 grid place-content-center" on:click={() => ($resetStore = !$resetStore)}>
+					<img src={imagePath} alt="reset captcha" class="" />
+				</button>
+			</div>
+			<div class="text-black border-black border-2 bg-red-200">
+				<form on:submit|preventDefault={checkCaptcha} class="grid grid-cols-2">
+					<input type="text" id="captchaInput" class="p-1 bg-white rounded-lg text-xl border-2 border-black" />
+					<button class="p-2 bg-white rounded-lg text-xl text-black border-2 border-green-500" type="submit">Submit</button>
+				</form>
+			</div>
 		</section>
 	</div>
 </div>
 
 <style>
-	/* #overlayContainer {
-		all: revert !important;
-	} */
+	answerBar {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
 </style>

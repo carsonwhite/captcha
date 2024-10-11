@@ -58,15 +58,10 @@
 		canvas = document.getElementById('captchaCanvas') as HTMLCanvasElement;
 		ctx = canvas.getContext('2d');
 		generate();
-		imagePath = browser.runtime.getURL('content/reset.png');
-		console.log('imagePath: ', imagePath);
 	});
 	$: $resetStore, generate();
 </script>
 
 <div class="border-2 border-purple-700 bg-white h-full w-full">
 	<canvas id="captchaCanvas" width={canvasWidth} height={canvasHeight} class="border-2"> </canvas>
-	<button class="h-10 w-10 grid place-content-center border-2 border-red-500" on:click={() => ($resetStore = !$resetStore)}>
-		<img src={imagePath} alt="reset captcha" class="" />
-	</button>
 </div>
