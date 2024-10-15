@@ -64,6 +64,6 @@
 	$: $resetStore, generate();
 </script>
 
-<div class="border-2 border-purple-700 bg-white h-full w-full">
-	<canvas id="captchaCanvas" width={canvasWidth} height={canvasHeight} class="border-2"> </canvas>
+<div class="bg-white h-full w-full">
+	<canvas id="captchaCanvas" width={canvasWidth} height={canvasHeight}> </canvas>
 </div>

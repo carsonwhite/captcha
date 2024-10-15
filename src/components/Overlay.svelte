@@ -23,26 +23,21 @@
 			blockList = res.blockList;
 			numToSolve = blockList[ruleNum]?.numToSolve;
 			difficulty = blockList[ruleNum]?.difficulty;
-			console.log('blockList: ', blockList, 'numToSolve: ', numToSolve, 'difficulty: ', difficulty);
 		});
 		imagePath = browser.runtime.getURL('content/reset.png');
 		overlay = document.getElementById('overlay')?.shadowRoot;
 
-		// stop the user from scrolling past the overlay while the overlay is active
-		document.body.style.overflow = 'hidden';
+		document.body.style.overflow = 'hidden'; // stop the user from scrolling past the overlay while the overlay is active
 	});
 
 	const checkCaptcha = () => {
 		let input = overlay?.getElementById('captchaInput') as HTMLInputElement;
-		console.log('input: ', input.value, 'answer: ', $answerStore);
-
 		if (input.value === $answerStore) {
 			solved++;
 			input.value = '';
 			$resetStore = !$resetStore;
 			if (solved === numToSolve) {
-				// restore scrolling
-				document.body.style.overflow = 'auto';
+				document.body.style.overflow = 'auto'; // restore scrolling
 				const overlayContainer = overlay?.getElementById('overlayContainer');
 				if (overlayContainer) {
 					overlayContainer.style.display = 'none';
@@ -53,12 +48,14 @@
 	};
 </script>
 
-<div id="overlayContainer" class="h-screen w-screen absolute top-0 overflow-hidden bg-black bg-opacity-90 font-mono z-50">
-	<div class="grid place-content-center h-full">
-		<section class="text-4xl grid place-content-center">
+<div id="overlayContainer" class="h-screen w-screen absolute top-0 overflow-hidden bg-black bg-opacity-95 font-mono z-50">
+	<div class="grid place-content-center h-full text-center">
+		<h1 class="text-5xl font-mono">CaptchaLock</h1>
+		<h4 class="mb-8">Is it worth it?</h4>
+		<h2 class="text-5xl grid place-content-center">
 			{solved} / {numToSolve}
-		</section>
-		<section class="grid relative">
+		</h2>
+		<section class="grid relative mt-2">
 			{#if difficulty}
 				<Captcha {difficulty}></Captcha>
 				<div class="absolute bottom-1 right-1 bg-white">
@@ -68,11 +65,11 @@
 				</div>
 			{/if}
 		</section>
-		<section class=" bg-white" id="answerBar">
-			<div class="text-black">
-				<form on:submit|preventDefault={checkCaptcha} class="grid grid-cols-2">
-					<input type="text" id="captchaInput" class="p-1 bg-white rounded-lg text-xl border-2 border-black" />
-					<button class="p-2 bg-white rounded-lg text-xl text-black border-2 border-green-500" type="submit">Submit</button>
+		<section class="mt-4">
+			<div class="text-black grid place-content-center">
+				<form on:submit|preventDefault={checkCaptcha}>
+					<input type="text" id="captchaInput" class="bg-white text-black border border-black mb-1 pl-1 text-xl" required />
+					<button class="text-teal-900 bg-teal-200 hover:bg-teal-400 border-2 border-teal-300 rounded-sm text-xl px-1" type="submit">Submit</button>
 				</form>
 			</div>
 		</section>
