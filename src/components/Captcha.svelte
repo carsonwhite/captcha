@@ -56,10 +56,7 @@
 
 	onMount(() => {
 		let overlayContainer = document.getElementById('overlay') as HTMLDivElement;
-
 		canvas = overlayContainer.shadowRoot?.getElementById('captchaCanvas') as HTMLCanvasElement;
-
-		console.log('canvas: ', canvas);
 
 		ctx = canvas.getContext('2d');
 		generate();

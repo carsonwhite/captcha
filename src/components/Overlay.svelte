@@ -2,7 +2,7 @@
 	import { resetStore } from '../stores/resetStore';
 	import Captcha from './Captcha.svelte';
 	import '../app.css';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { answerStore } from '../stores/answerStore';
 
 	// this import makes sure the image gets bundled with the rest of the code
@@ -16,6 +16,8 @@
 	let imagePath: string;
 	let difficulty: number;
 
+	let overlay: ShadowRoot | null | undefined;
+
 	onMount(async () => {
 		browser.storage.local.get('blockList').then((res) => {
 			blockList = res.blockList;
@@ -24,11 +26,14 @@
 			console.log('blockList: ', blockList, 'numToSolve: ', numToSolve, 'difficulty: ', difficulty);
 		});
 		imagePath = browser.runtime.getURL('content/reset.png');
-		console.log('imagePath: ', imagePath);
+		overlay = document.getElementById('overlay')?.shadowRoot;
+
+		// stop the user from scrolling past the overlay while the overlay is active
+		document.body.style.overflow = 'hidden';
 	});
 
 	const checkCaptcha = () => {
-		let input = document.getElementById('captchaInput') as HTMLInputElement;
+		let input = overlay?.getElementById('captchaInput') as HTMLInputElement;
 		console.log('input: ', input.value, 'answer: ', $answerStore);
 
 		if (input.value === $answerStore) {
@@ -36,30 +41,35 @@
 			input.value = '';
 			$resetStore = !$resetStore;
 			if (solved === numToSolve) {
-				// document.getElementById('cover').style.display = 'none';
+				// restore scrolling
+				document.body.style.overflow = 'auto';
+				const overlayContainer = overlay?.getElementById('overlayContainer');
+				if (overlayContainer) {
+					overlayContainer.style.display = 'none';
+				}
 				$resetStore = !$resetStore;
 			}
 		}
 	};
 </script>
 
-<div id="overlayContainer" class="h-screen w-screen sticky top-0 overflow-hidden bg-black font-mono" style="position: absolute; top: 0px; z-index: 1000;">
-	<div class="grid place-content-center h-full border border-red-500">
-		<section class="text-4xl grid place-content-center bg-green-500 text-white border">
+<div id="overlayContainer" class="h-screen w-screen absolute top-0 overflow-hidden bg-black bg-opacity-90 font-mono z-50">
+	<div class="grid place-content-center h-full">
+		<section class="text-4xl grid place-content-center">
 			{solved} / {numToSolve}
 		</section>
-		<section class="grid">
+		<section class="grid relative">
 			{#if difficulty}
 				<Captcha {difficulty}></Captcha>
+				<div class="absolute bottom-1 right-1 bg-white">
+					<button class="w-10 h-10 grid place-content-center" on:click={() => ($resetStore = !$resetStore)}>
+						<img src={imagePath} alt="reset captcha" class="" />
+					</button>
+				</div>
 			{/if}
 		</section>
 		<section class=" bg-white" id="answerBar">
-			<div class="">
-				<button class="w-10 h-10 grid place-content-center" on:click={() => ($resetStore = !$resetStore)}>
-					<img src={imagePath} alt="reset captcha" class="" />
-				</button>
-			</div>
-			<div class="text-black border-black border-2 bg-red-200">
+			<div class="text-black">
 				<form on:submit|preventDefault={checkCaptcha} class="grid grid-cols-2">
 					<input type="text" id="captchaInput" class="p-1 bg-white rounded-lg text-xl border-2 border-black" />
 					<button class="p-2 bg-white rounded-lg text-xl text-black border-2 border-green-500" type="submit">Submit</button>
@@ -68,10 +78,3 @@
 		</section>
 	</div>
 </div>
-
-<style>
-	answerBar {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-	}
-</style>
