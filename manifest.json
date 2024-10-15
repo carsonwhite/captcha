@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"name": "Captcha Blocker",
+	"name": "CaptchaLock",
 	"version": "1.0",
 	"description": "No one likes captchas, make yourself solve one to get to your favourite time wasting websites",
 	"permissions": [
