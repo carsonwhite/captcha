@@ -36,7 +36,7 @@
 		} else {
 			$rulesStore[+id] = rule;
 		}
-		browser.storage.local.set({ reminders: $rulesStore });
+		browser.storage.local.set({ blockList: $rulesStore });
 		$addNewRuleStore = false;
 		$showEditStore = -2;
 	};
@@ -47,7 +47,7 @@
 	};
 	const deleteRule = () => {
 		$rulesStore.splice(+id, 1);
-		browser.storage.local.set({ reminders: $rulesStore });
+		browser.storage.local.set({ blockList: $rulesStore });
 		$showEditStore = -1;
 	};
 </script>

@@ -6,13 +6,13 @@
 	import { isBetweeen } from '../lib/helpers';
 
 	onMount(async () => {
-		let storage = await browser.storage.local.get('reminders');
+		let storage = await browser.storage.local.get('blockList');
 
-		if (!storage.reminders) {
-			browser.storage.local.set({ reminders: [] });
+		if (!storage.blockList) {
+			browser.storage.local.set({ blockList: [] });
 			$addNewRuleStore = true;
 		} else {
-			$rulesStore = storage.reminders;
+			$rulesStore = storage.blockList;
 		}
 	});
 
@@ -25,15 +25,15 @@
 		<h3 class="text-xs text-gray-600">Captchas are annoying, solve one if you <strong class="font-bold">really</strong> want to waste time</h3>
 	</section>
 
-	{#each $rulesStore as reminder, index}
+	{#each $rulesStore as rule, index}
 		<div class=" border-2 border-black rounded-sm mb-2">
 			<div class="grid grid-cols-8">
 				{#if !($showEditStore === index)}
 					<div class="col-span-5 grid pl-2">
-						<h2 class="text-lg">{reminder.website}</h2>
+						<h2 class="text-lg">{rule.website}</h2>
 					</div>
 					<div class="col-span-2 grid place-content-center">
-						{#if isBetweeen(reminder.startTime, reminder.endTime) && reminder.days[new Date().getDay()]}
+						{#if isBetweeen(rule.startTime, rule.endTime) && rule.days[new Date().getDay()]}
 							<p class="text-green-700">Active</p>
 						{:else}
 							<p class="text-gray-500">Inactive</p>
