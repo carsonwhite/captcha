@@ -16,6 +16,10 @@
 	let imagePath: string;
 	let difficulty: number;
 
+	let base;
+	let stylesheets;
+	let scripts;
+
 	onMount(async () => {
 		browser.storage.local.get('blockList').then((res) => {
 			blockList = res.blockList;
@@ -25,6 +29,14 @@
 		});
 		imagePath = browser.runtime.getURL('content/reset.png');
 		console.log('imagePath: ', imagePath);
+		base = document.getRootNode() as Document;
+		console.log(base);
+		stylesheets = Array.from(base.styleSheets).filter((stylesheet) => !stylesheet.href || !stylesheet.href.includes('content/index.css'));
+		stylesheets.forEach((stylesheet) => {
+			if (stylesheet.ownerNode && stylesheet.ownerNode.parentNode) {
+				stylesheet.ownerNode.parentNode.removeChild(stylesheet.ownerNode);
+			}
+		});
 	});
 
 	const checkCaptcha = () => {
@@ -42,6 +54,10 @@
 		}
 	};
 </script>
+
+<svelte:head>
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</svelte:head>
 
 <div id="overlayContainer" class="h-screen w-screen sticky top-0 overflow-hidden bg-black font-mono" style="position: absolute; top: 0px; z-index: 1000;">
 	<div class="grid place-content-center h-full border border-red-500">

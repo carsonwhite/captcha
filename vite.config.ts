@@ -24,7 +24,9 @@ export default defineConfig(({ mode }) => {
 	// Check for content mode
 	if (mode === 'content') {
 		return {
-			plugins,
+			plugins: [
+				svelte({ emitCss: false }),
+			],
 			build: {
 				rollupOptions: {
 					input: resolve(__dirname, 'src/overlay/index.ts'), // Only the content script
