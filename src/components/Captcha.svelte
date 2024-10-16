@@ -12,8 +12,6 @@
 	let canvasWidth: number = 400 + length * 5;
 	let canvasHeight: number = 100;
 
-	console.log('canvasWidth: ', canvasWidth, 'length: ', length);
-
 	let canvas: HTMLCanvasElement;
 	let ctx: CanvasRenderingContext2D;
 
@@ -35,10 +33,12 @@
 	}
 
 	const generate = () => {
-		let randomString: string[] = generateRandomString();
-		$answerStore = randomString.map((el) => el[0]).join('');
+		console.log(canvasWidth, canvasHeight);
 
 		if (ctx) {
+			let randomString: string[] = generateRandomString();
+			$answerStore = randomString.map((el) => el[0]).join('');
+
 			ctx.font = '40px Arial';
 			ctx.fillStyle = 'white';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -51,19 +51,23 @@
 				ctx.fillText(letter, 0, 0);
 				ctx.restore();
 			});
+			// because some websites stop the canvas from showing, images work consistently
+			imagePath = canvas.toDataURL('image/png');
 		}
 	};
 
 	onMount(() => {
 		let overlayContainer = document.getElementById('overlay') as HTMLDivElement;
 		canvas = overlayContainer.shadowRoot?.getElementById('captchaCanvas') as HTMLCanvasElement;
-
 		ctx = canvas.getContext('2d');
 		generate();
 	});
 	$: $resetStore, generate();
 </script>
 
-<div class="bg-white h-full w-full">
-	<canvas id="captchaCanvas" width={canvasWidth} height={canvasHeight}> </canvas>
+<div class="text-white h-full w-full">
+	<canvas id="captchaCanvas" width={canvasWidth} height={canvasHeight} class="hidden"></canvas>
+	<div>
+		<img src={imagePath} alt="Captcha" />
+	</div>
 </div>

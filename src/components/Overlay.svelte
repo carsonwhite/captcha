@@ -48,9 +48,9 @@
 	};
 </script>
 
-<div id="overlayContainer" class="h-screen w-screen absolute top-0 overflow-hidden bg-black bg-opacity-95 font-mono">
+<div id="overlayContainer" class="h-screen w-screen absolute top-0 overflow-hidden bg-black bg-opacity-95 font-mono text-white">
 	<div class="grid place-content-center h-full text-center">
-		<h1 class="text-5xl font-mono">CaptchaLock</h1>
+		<h1 class="text-5xl">CaptchaLock</h1>
 		<h4 class="mb-8">Is it worth it?</h4>
 		<h2 class="text-5xl grid place-content-center">
 			{solved} / {numToSolve}
