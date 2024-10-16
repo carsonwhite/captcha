@@ -1,3 +1,5 @@
+import { isBetweeen } from "../lib/helpers";
+
 browser.webNavigation.onCompleted.addListener(async (details) => {
 	const url = new URL(details.url).hostname;
 	// const { blockList } = { websites: ['google.com'] };
@@ -6,13 +8,15 @@ browser.webNavigation.onCompleted.addListener(async (details) => {
 	for await (let site of blockList) {
 
 		if (url.includes(site.website)) {
-			let index = blockList.indexOf(site);
+			if (isBetweeen(site.startTime, site.endTime) && site.days[(new Date()).getDay()]) {
+				let index = blockList.indexOf(site);
 
-			browser.tabs.sendMessage(details.tabId, { action: "showOverlay", ruleNum: index }).then(() => {
-				console.log("overlay sent");
-			}).catch((err) => {
-				console.log("error: ", err);
-			});
+				browser.tabs.sendMessage(details.tabId, { action: "showOverlay", ruleNum: index }).then(() => {
+					console.log("overlay sent");
+				}).catch((err) => {
+					console.log("error: ", err);
+				});
+			}
 		}
 	}
 

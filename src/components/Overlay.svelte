@@ -48,7 +48,7 @@
 	};
 </script>
 
-<div id="overlayContainer" class="h-screen w-screen absolute top-0 overflow-hidden bg-black bg-opacity-95 font-mono z-50">
+<div id="overlayContainer" class="h-screen w-screen absolute top-0 overflow-hidden bg-black bg-opacity-95 font-mono">
 	<div class="grid place-content-center h-full text-center">
 		<h1 class="text-5xl font-mono">CaptchaLock</h1>
 		<h4 class="mb-8">Is it worth it?</h4>
@@ -75,3 +75,9 @@
 		</section>
 	</div>
 </div>
+
+<style>
+	#overlayContainer {
+		z-index: 9999;
+	}
+</style>
