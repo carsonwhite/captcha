@@ -33,7 +33,7 @@
 	}
 
 	const generate = () => {
-		console.log(canvasWidth, canvasHeight);
+		console.log('generate');
 
 		if (ctx) {
 			let randomString: string[] = generateRandomString();
